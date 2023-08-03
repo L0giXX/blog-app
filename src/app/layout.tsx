@@ -1,6 +1,14 @@
 import "./globals.css";
+import localFont from "@next/font/local";
 import type { Metadata } from "next";
-import Header from "./header";
+import Header from "../components/header";
+import Background from "../components/background";
+
+const hubot = localFont({
+  src: "../../public/HubotSans.woff2",
+  variable: "--font-hubot",
+  weight: "400 900",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,10 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={hubot.className}>
       <body>
-        <Header />
-        {children}
+        <Background>
+          <Header />
+          {children}
+        </Background>
       </body>
     </html>
   );
