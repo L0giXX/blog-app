@@ -17,6 +17,7 @@ async function getRepos() {
       headers: {
         Authorization: `token ${process.env.GITHUB_TOKEN}`,
       },
+      cache: "no-cache",
     });
     const json = await res.json();
     return json as Repo[];
