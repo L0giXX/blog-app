@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import type { Metadata } from "next";
 import Header from "../components/header";
 import Background from "../components/background";
+import Footer from "../components/footer";
 
 const hubot = localFont({
   src: "../../public/HubotSans.woff2",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Background>
           <Header />
           {children}
+          <Footer />
         </Background>
       </body>
     </html>

@@ -4,7 +4,7 @@ import ProfileImage from "./profileImage";
 
 export default function Header() {
   return (
-    <header className="mx-auto h-screen max-w-[640px] p-4 sm:mt-8 lg:mt-32">
+    <header className="mx-auto max-w-[640px] p-4 sm:mt-8 lg:mt-32">
       <div className="flex flex-col">
         <div className="flex justify-start">
           <ProfileImage />
@@ -16,9 +16,9 @@ export default function Header() {
         <div className="mt-7">
           <p className="text-xl">
             Welcome to my personal blog where I write about my experiences with
-            software development, in particular with web development. I am 19
-            years old and currently studying informatics at the University of
-            Applied Sciences in Wr Neustadt, Austria.
+            software development. I am 19 years old and currently studying
+            computer science at the University of Applied Sciences in Wr.
+            Neustadt, Austria.
           </p>
         </div>
         <div className="mt-7 flex flex-row">
@@ -76,7 +76,7 @@ export default function Header() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 inline h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-r from-fuchsia-500/50 to-cyan-500/50 p-[2px] shadow-lg transition delay-100 duration-500 ease-in-out hover:scale-125 hover:from-fuchsia-500 hover:to-cyan-500"
+                className="mr-2 inline h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-r from-fuchsia-500/50 to-cyan-500/50 p-[3px] shadow-lg transition delay-100 duration-500 ease-in-out hover:scale-125 hover:from-fuchsia-500 hover:to-cyan-500"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
