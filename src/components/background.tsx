@@ -6,7 +6,7 @@ export default function Background({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-gradient-to-r from-violet-200 to-pink-200 h-screen">
+    <div className="min-h-screen bg-gradient-to-r from-violet-200 to-pink-200 pt-1">
       {children}
     </div>
   );
