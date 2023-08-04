@@ -54,7 +54,7 @@ async function Home() {
   });
 
   return (
-    <div className="mx-auto max-w-[640px] p-4">
+    <div className="mx-auto max-w-[640px] px-4">
       <div className="flex flex-col">
         {filteredRepos.map((repo) => (
           <div key={repo.id} className="mb-8">
