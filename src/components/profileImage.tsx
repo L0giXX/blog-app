@@ -1,7 +1,6 @@
-import React from "react";
 import Image from "next/image";
-import profileImage from "../../public/profile_Image.png";
 import Link from "next/link";
+import profileImage from "../../public/profile_Image.png";
 
 export default function ProfileImage() {
   return (
