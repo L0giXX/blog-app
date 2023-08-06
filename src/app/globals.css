@@ -6,4 +6,7 @@
   html {
     @apply text-white;
   }
+  .footer-link {
+    @apply hover:text-sky-400 hover:underline hover:decoration-sky-400 hover:underline-offset-2;
+  }
 }
