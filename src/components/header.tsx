@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ProfileImage from "./profileImage";
 import Svg from "./svg";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,7 +13,9 @@ export default function Header() {
   } else condition = "mt-6";
 
   return (
-    <header className={`mx-auto max-w-[640px] p-4 ${condition}`}>
+    <header
+      className={`mx-auto max-w-[640px] p-4 ${condition} transition-all duration-300 ease-in-out`}
+    >
       <div className="flex flex-col">
         <div className="flex justify-start">
           <ProfileImage />
@@ -30,7 +32,7 @@ export default function Header() {
             Neustadt, Austria.
           </p>
         )}
-        <div className="mt-8 flex justify-center sm:justify-start">
+        <div className="mt-8 flex justify-center transition-all duration-300 ease-in-out sm:justify-start">
           <a
             className="flex flex-col items-center text-xl font-semibold sm:flex-row"
             href="https://www.linkedin.com/in/marc-m%C3%BCller-929798253/"

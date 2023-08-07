@@ -12,5 +12,5 @@ module.exports = {
       sans: ["hubotsans", ...defaultTheme.fontFamily.sans],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
