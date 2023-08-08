@@ -4,14 +4,6 @@ import { compileMDX } from "next-mdx-remote/rsc";
 
 const rootDir = path.join(process.cwd(), "src", "app", "content");
 
-type Post = {
-  meta: {
-    title: string;
-    author: string;
-    slug: string;
-  };
-};
-
 export const getPostBySlug = async (slug: string) => {
   const realSlug = slug.replace(/\.mdx$/, "");
   const filePath = path.join(rootDir, `${realSlug}.mdx`);
