@@ -4,15 +4,15 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
-import { rehypePrettyCodeOptions } from "@/lib/rehypePrettyCode";
+import { rehypePrettyCodeOptions } from "./rehypePrettyCode";
 
-const rootDir = path.join(process.cwd(), "src", "content");
+const rootDir = path.join(process.cwd(), "src/content");
 
 export const getPostByName = async (name: string) => {
   const id = name.replace(/\.mdx$/, "");
   const filePath = path.join(rootDir, `${id}.mdx`);
 
-  const fileContent = fs.readFileSync(filePath);
+  const fileContent = fs.readFileSync(filePath, "utf8");
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
