@@ -8,8 +8,10 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      sans: ["hubotsans", ...defaultTheme.fontFamily.sans],
+    extend: {
+      fontFamily: {
+        sans: ["hubotsans", ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
