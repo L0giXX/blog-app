@@ -3,6 +3,7 @@ import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
+import rehypePrism from "rehype-prism-plus";
 import rehypePrettyCode from "rehype-pretty-code";
 import { rehypePrettyCodeOptions } from "./rehypePrettyCode";
 
@@ -24,7 +25,7 @@ export const getPostByName = async (name: string) => {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          [rehypePrettyCode, rehypePrettyCodeOptions],
+          rehypePrism,
           rehypeSlug,
           [
             rehypeAutoLinkHeadings,
