@@ -1,13 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { getAllPostsMeta, getPostByName } from "@/lib/mdx";
+import { getAllPostsMeta } from "@/lib/mdx";
 import { formatDate } from "@/lib/formatDate";
 
 export default async function Page() {
   let posts = await getAllPostsMeta();
   if (!posts) return null;
   posts = formatDate(posts);
-  const post1 = await getPostByName("diplom");
   return (
     <div>
       <div className="mx-auto max-w-[640px] px-4">
@@ -23,7 +22,6 @@ export default async function Page() {
                 </h1>
                 <h2 className="mb-2 text-sm text-gray-600">{post.date}</h2>
                 <p className=" text-gray-500">{post.description}</p>
-                <article className="prose">{post1.content}</article>
               </Link>
             </div>
           ))}

@@ -3,7 +3,6 @@ import { getPostByName } from "@/lib/mdx";
 
 export default async function Page({ params }: { params: { id: string } }) {
   let post = await getPostByName(params.id);
-  if (!post) return null;
   post = formatDate2(post);
   const { title, date } = post.meta;
   const { content } = post;
