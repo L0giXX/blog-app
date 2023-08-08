@@ -24,7 +24,6 @@ export const getPostByName = async (name: string) => {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          rehypePrettyCode,
           rehypeSlug,
           [
             rehypeAutoLinkHeadings,
