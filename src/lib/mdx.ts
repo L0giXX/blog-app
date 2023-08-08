@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import { rehypePrettyCodeOptions } from "./rehypePrettyCode";
 
-const rootDir = path.join(process.cwd(), "src/content");
+const rootDir = path.join(process.cwd(), "src/app/content");
 
 export const getPostByName = async (name: string) => {
   const id = name.replace(/\.mdx$/, "");
