@@ -1,4 +1,6 @@
-const rehypePrettyCode = require("rehype-pretty-code");
+import rehypePrettyCode from "rehype-pretty-code";
+import createMDX from "@next/mdx";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {};
 
@@ -6,9 +8,10 @@ const nextConfig = {};
 const options = {
   theme: "github-dark",
 };
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx?$/,
+
+const withMDX = createMDX({
   options: {
+    extension: /\.mdx?$/,
     remarkPlugins: [],
     rehypePlugins: [[rehypePrettyCode, options]],
   },
