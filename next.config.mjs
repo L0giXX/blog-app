@@ -16,4 +16,4 @@ const withMDX = createMDX({
     rehypePlugins: [[rehypePrettyCode, options]],
   },
 });
-module.exports = withMDX(nextConfig);
+export default withMDX(nextConfig);
