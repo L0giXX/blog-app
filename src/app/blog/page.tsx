@@ -22,7 +22,6 @@ export default async function Page() {
                 </h1>
                 <h2 className="mb-2 text-sm text-gray-600">{post.date}</h2>
                 <p className=" text-gray-500">{post.description}</p>
-                {post.id}
               </Link>
             </div>
           ))}

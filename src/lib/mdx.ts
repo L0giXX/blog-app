@@ -5,7 +5,7 @@ import rehypeAutoLinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
 import rehypePrism from "rehype-prism-plus";
 import rehypePrettyCode from "rehype-pretty-code";
-import { rehypePrettyCodeOptions } from "./rehypePrettyCode";
+import rehypeCodeTitles from "rehype-code-titles";
 
 const rootDir = path.join(process.cwd(), "src/app/content");
 
@@ -25,7 +25,8 @@ export const getPostByName = async (name: string) => {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          rehypePrism,
+          rehypeCodeTitles,
+          rehypePrettyCode,
           rehypeSlug,
           [
             rehypeAutoLinkHeadings,
