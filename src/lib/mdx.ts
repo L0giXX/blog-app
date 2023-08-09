@@ -6,9 +6,14 @@ import rehypeSlug from "rehype-slug";
 import rehypePrism from "rehype-prism-plus";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeCodeTitles from "rehype-code-titles";
-import oneDarkPro from "shiki/themes/one-dark-pro.json";
+import { Theme } from "shiki";
 
 const rootDir = path.join(process.cwd(), "src/app/content");
+
+const theme: Theme = "one-dark-pro";
+const rehypePrettyCodeOptions = {
+  theme: theme,
+};
 
 export const getPostByName = async (name: string) => {
   const id = name.replace(/\.mdx$/, "");
@@ -26,14 +31,7 @@ export const getPostByName = async (name: string) => {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          rehypeCodeTitles,
-          [
-            rehypePrettyCode,
-            {
-              keepBackground: false,
-              theme: oneDarkPro,
-            },
-          ],
+          [rehypePrettyCode, rehypePrettyCodeOptions],
           rehypeSlug,
           [
             rehypeAutoLinkHeadings,
