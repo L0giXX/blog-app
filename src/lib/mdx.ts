@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypePrism from "rehype-prism-plus";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeCodeTitles from "rehype-code-titles";
+import oneDarkPro from "shiki/themes/one-dark-pro.json";
 
 const rootDir = path.join(process.cwd(), "src/app/content");
 
@@ -26,7 +27,13 @@ export const getPostByName = async (name: string) => {
       mdxOptions: {
         rehypePlugins: [
           rehypeCodeTitles,
-          rehypePrettyCode,
+          [
+            rehypePrettyCode,
+            {
+              keepBackground: false,
+              theme: oneDarkPro,
+            },
+          ],
           rehypeSlug,
           [
             rehypeAutoLinkHeadings,
