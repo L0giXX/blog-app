@@ -1,11 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    outputFileTracingIncludes: {
-      "/blog/[slug]": ["node_modules/shiki/**/*"],
-    },
-    serverComponentsExternalPackages: ["shiki"],
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;

@@ -1,19 +1,54 @@
 import fs from "fs";
+import fsP from "fs/promises";
 import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
 import rehypePrism from "rehype-prism-plus";
-import rehypePrettyCode from "rehype-pretty-code";
+import rehypeCode, { Options } from "rehype-pretty-code";
 import rehypeCodeTitles from "rehype-code-titles";
-import { Theme } from "shiki";
+import * as shiki from "shiki";
+
+const getShikiPath = (): string => {
+  return path.join(process.cwd(), "src/lib/shiki");
+};
+
+const touched = { current: false };
+
+const touchShikiPath = (): void => {
+  if (touched.current) return; // only need to do once
+  fsP.readdir(getShikiPath()); // fire and forget
+  touched.current = true;
+};
+
+const getHighlighter: Options["getHighlighter"] = async (options) => {
+  touchShikiPath();
+
+  const highlighter = await shiki.getHighlighter({
+    // This is technically not compatible with shiki's interface but
+    // necessary for rehype-pretty-code to work
+    // - https://rehype-pretty-code.netlify.app/ (see Custom Highlighter)
+    ...(options as any),
+    paths: {
+      languages: `${getShikiPath()}/languages/`,
+      themes: `${getShikiPath()}/themes/`,
+    },
+  });
+
+  return highlighter;
+};
+
+const getRehypeCodeOptions = (): Partial<Options> => ({
+  // Requirements for theme:
+  // - Has light and dark version
+  // - Uses italic in several places
+  theme: "github-dark",
+  // Need to use a custom highlighter because rehype-pretty-code doesn't
+  // let us customize "paths".
+  getHighlighter,
+});
 
 const rootDir = path.join(process.cwd(), "src/app/content");
-
-const theme: Theme = "one-dark-pro";
-const rehypePrettyCodeOptions = {
-  theme: theme,
-};
 
 export const getPostByName = async (name: string) => {
   const id = name.replace(/\.mdx$/, "");
@@ -32,7 +67,7 @@ export const getPostByName = async (name: string) => {
       mdxOptions: {
         development: process.env.NODE_ENV === "development",
         rehypePlugins: [
-          [rehypePrettyCode, rehypePrettyCodeOptions],
+          [rehypeCode, getRehypeCodeOptions()],
           rehypeSlug,
           [
             rehypeAutoLinkHeadings,
