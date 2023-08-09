@@ -30,6 +30,7 @@ export const getPostByName = async (name: string) => {
     options: {
       parseFrontmatter: true,
       mdxOptions: {
+        development: process.env.NODE_ENV === "development",
         rehypePlugins: [
           [rehypePrettyCode, rehypePrettyCodeOptions],
           rehypeSlug,
