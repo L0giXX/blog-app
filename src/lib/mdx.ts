@@ -4,10 +4,15 @@ import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutoLinkHeadings from "rehype-autolink-headings/lib";
 import rehypeSlug from "rehype-slug";
-import rehypePrism from "rehype-prism-plus";
 import rehypeCode, { Options } from "rehype-pretty-code";
-import rehypeCodeTitles from "rehype-code-titles";
 import * as shiki from "shiki";
+
+// https://github.com/shikijs/shiki/issues/138#issuecomment-1057471160
+// Since there are problems with using shiki in a Next.js production build,
+// I used this workaround to get it to work. The trick is that we need to
+// copy the shiki themes and languages outside of node_modules and into our
+// project (src/lib/shiki). With this solution Vercel knows the existence of
+// the shiki themes and languages, so they are included in the production build.
 
 const getShikiPath = (): string => {
   return path.join(process.cwd(), "src/lib/shiki");
@@ -39,12 +44,8 @@ const getHighlighter: Options["getHighlighter"] = async (options) => {
 };
 
 const getRehypeCodeOptions = (): Partial<Options> => ({
-  // Requirements for theme:
-  // - Has light and dark version
-  // - Uses italic in several places
-  theme: "github-dark",
-  // Need to use a custom highlighter because rehype-pretty-code doesn't
-  // let us customize "paths".
+  theme: "light-plus",
+  keepBackground: false,
   getHighlighter,
 });
 
@@ -65,7 +66,6 @@ export const getPostByName = async (name: string) => {
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        development: process.env.NODE_ENV === "development",
         rehypePlugins: [
           [rehypeCode, getRehypeCodeOptions()],
           rehypeSlug,
@@ -104,6 +104,7 @@ export async function getAllPostsMeta(): Promise<Meta[] | undefined> {
       posts.push(meta);
     }
   }
+  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return posts;
 }

@@ -117,7 +117,7 @@ npm install rehype-pretty-code shiki
 
 - Add Pretty Code to the list of rehype plugins for MDX files.
 
-```typescript:lib/mdx.ts showLineNumbers {3}
+```js showLineNumbers title="./contentlayer.config.js" {9}
 import { makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
 import { Post } from "./content/definitions/Post";
@@ -135,7 +135,7 @@ export default makeSource({
 
 Let's create a post to preview our progress so far.
 
-````md showLineNumbers=1
+````md showLineNumbers title="./content/posts/syntax-highlighting.mdx" {5-7}
 # Code Block
 
 This is my first code block:
@@ -152,7 +152,7 @@ const multiply = (a, b) => a * b;
 
 We can customize the VS Code theme used to highlight our code.
 
-```ts showLineNumbers
+```ts showLineNumbers title="./lib/rehypePrettyCode.ts" {6}
 import { type Options } from "rehype-pretty-code";
 import vercelLightTheme from "./lib/themes/vercel-light.json";
 
@@ -195,8 +195,8 @@ We can enable features per code block using annotations. For example, we can set
 
 The following annotations:
 
-````txt:multiply.js
-```js showLineNumbers" {3}
+````txt
+```js showLineNumbers title="multiply.js" {3}
 const multiply = (a, b) => a * b
 
 multiply(2, 2) // 4
