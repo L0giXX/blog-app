@@ -37,6 +37,9 @@ const getHighlighter: Options["getHighlighter"] = async (options) => {
     paths: {
       languages: `${getShikiPath()}/languages/`,
       themes: `${getShikiPath()}/themes/`,
+      onVisitHighlightedLine(node: any) {
+        node.properties.className.push("line--highlighted");
+      },
     },
   });
 

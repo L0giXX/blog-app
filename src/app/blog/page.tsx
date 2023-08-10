@@ -12,7 +12,7 @@ export default async function Page() {
       <div className="mx-auto max-w-[640px] px-4">
         <div className="flex flex-col">
           {posts.map((post) => (
-            <div key={post.title} className="mb-8">
+            <div key={post.id} className="mb-8">
               <Link
                 href={`/blog/${post.id}`}
                 className="block rounded-lg border border-gray-200 bg-white/20 p-4 shadow hover:bg-white/40"
