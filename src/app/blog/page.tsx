@@ -18,7 +18,7 @@ async function getViews() {
   });
   const data = await res.json();
   if (!res.ok) {
-    throw new Error(data.error);
+    console.log(data.error);
   }
   return data;
 }
