@@ -1,12 +1,32 @@
 import React from "react";
 import Link from "next/link";
-import { getAllPostsMeta } from "@/lib/mdx";
-import { formatDate } from "@/lib/formatDate";
+import { getAllPostsMeta } from "@lib/mdx";
+import { formatDate } from "@lib/formatDate";
+import { getViews } from "@lib/views";
+
+interface PostViews {
+  id: string;
+  title: string;
+  createdAt: string;
+  views: number;
+}
 
 export default async function Page() {
   let posts = await getAllPostsMeta();
+  let postViews: PostViews[] = await getViews();
   if (!posts) return null;
+
   posts = formatDate(posts);
+  posts = posts.map((post) => {
+    const matchingView = postViews.find((postV) => postV.title === post.id);
+    if (matchingView) {
+      return {
+        ...post,
+        views: matchingView.views,
+      };
+    }
+    return post;
+  });
   return (
     <div>
       <div className="mx-auto max-w-[640px] px-4">
@@ -20,7 +40,10 @@ export default async function Page() {
                 <h1 className="text-lg font-semibold text-gray-700">
                   {post.title}
                 </h1>
-                <h2 className="mb-2 text-sm text-gray-600">{post.date}</h2>
+                <h2 className="text-sm text-gray-600">{post.date}</h2>
+                <h2 className="mb-2 text-sm text-gray-600">
+                  {post.views} views
+                </h2>
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>

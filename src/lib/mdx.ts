@@ -89,6 +89,7 @@ export const getPostByName = async (name: string) => {
       title: frontmatter.title,
       date: frontmatter.date,
       description: frontmatter.description,
+      views: 0,
     },
     content,
   };
