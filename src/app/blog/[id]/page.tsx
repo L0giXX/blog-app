@@ -27,6 +27,7 @@ async function getViewsById(id: string) {
       const data = await res.json();
       throw new Error(data.error);
     }
+    return { views: 0 };
   } else return data;
 }
 
