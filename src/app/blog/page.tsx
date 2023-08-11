@@ -3,12 +3,12 @@ import Link from "next/link";
 import { getAllPostsMeta } from "@lib/mdx";
 import { formatDate } from "@lib/formatDate";
 
-interface PostViews {
+type PostViews = {
   id: string;
   title: string;
   createdAt: string;
   views: number;
-}
+};
 
 async function getViews() {
   const server = process.env.SERVER_URL;
@@ -21,12 +21,13 @@ async function getViews() {
     throw new Error("Error fetching views");
   }
   const data = await res.json();
-  return data;
+  return data.posts;
 }
 
 export default async function Page() {
   let posts = await getAllPostsMeta();
-  let postViews: PostViews[] = await getViews();
+  let postViews = (await getViews()) as PostViews[];
+  console.log(postViews);
   if (!posts) return null;
   if (!postViews) return null;
   posts = formatDate(posts);
