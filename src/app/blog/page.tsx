@@ -26,7 +26,7 @@ async function getViews() {
 
 export default async function Page() {
   let posts = await getAllPostsMeta();
-  let postViews = (await getViews()) as PostViews[];
+  const postViews = (await getViews()) as PostViews[];
   console.log(postViews);
   if (!posts) return null;
   if (!postViews) return null;
