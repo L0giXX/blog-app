@@ -27,7 +27,7 @@ export default async function Page() {
   let posts = await getAllPostsMeta();
   let postViews: PostViews[] = await getViews();
   if (!posts) return null;
-
+  if (!postViews) return null;
   posts = formatDate(posts);
   posts = posts.map((post) => {
     const matchingView = postViews.find((postV) => postV.title === post.id);
