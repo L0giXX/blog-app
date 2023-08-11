@@ -19,16 +19,7 @@ async function getViewsById(id: string) {
     throw new Error("Error fetching views");
   }
   const data = await res.json();
-  if (data === null) {
-    const res = await fetch(`${server}/api/views/${id}`, {
-      method: "POST",
-    });
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error);
-    }
-    return { views: 0 };
-  } else return data;
+  return data;
 }
 
 async function getPost(id: string) {
@@ -38,9 +29,9 @@ async function getPost(id: string) {
   return post;
 }
 
-async function updateViews(id: string) {
+async function upsertViews(id: string) {
   const res = await fetch(`${server}/api/views/${id}`, {
-    method: "PUT",
+    method: "POST",
     cache: "no-cache",
   });
   if (!res.ok) {
@@ -50,9 +41,9 @@ async function updateViews(id: string) {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const postViews = (await getViewsById(params.id)) as viewsPerPost;
   const post = await getPost(params.id);
-  await updateViews(params.id);
+  await upsertViews(params.id);
+  const postViews = (await getViewsById(params.id)) as viewsPerPost;
   const { views } = postViews;
   const { title, date } = post!.meta;
   const content = post!.content;

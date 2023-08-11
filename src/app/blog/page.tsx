@@ -10,36 +10,36 @@ type PostViews = {
   views: number;
 };
 
-// async function getViews() {
-//   const server = process.env.SERVER_URL;
-//   const res = await fetch(`${server}/api/views`, {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json" },
-//     cache: "no-cache",
-//   });
-//   const data = await res.json();
-//   if (!res.ok) {
-//     throw new Error(data.error);
-//   }
-//   return data.posts;
-// }
+async function getViews() {
+  const server = process.env.SERVER_URL;
+  const res = await fetch(`${server}/api/views`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    cache: "no-cache",
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
+  return data.posts;
+}
 
 export default async function Page() {
   let posts = await getAllPostsMeta();
-  //const postViews = (await getViews()) as PostViews[];
+  const postViews = (await getViews()) as PostViews[];
   if (!posts) return null;
-  //if (!postViews) return null;
+  if (!postViews) return null;
   posts = formatDate(posts);
-  // posts = posts.map((post) => {
-  //   const matchingView = postViews.find((postV) => postV.title === post.id);
-  //   if (matchingView) {
-  //     return {
-  //       ...post,
-  //       views: matchingView.views,
-  //     };
-  //   }
-  //   return post;
-  // });
+  posts = posts.map((post) => {
+    const matchingView = postViews.find((postV) => postV.title === post.id);
+    if (matchingView) {
+      return {
+        ...post,
+        views: matchingView.views,
+      };
+    }
+    return post;
+  });
   return (
     <div>
       <div className="mx-auto max-w-[640px] px-4">
@@ -54,9 +54,11 @@ export default async function Page() {
                   {post.title}
                 </h1>
                 <h2 className="text-sm text-gray-600">{post.date}</h2>
-                {/* <h2 className="mb-2 text-sm text-gray-600">
-                  {post.views} views
-                </h2> */}
+                {post.views > 0 && (
+                  <h2 className="mb-2 text-sm text-gray-600">
+                    {post.views} views
+                  </h2>
+                )}
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>

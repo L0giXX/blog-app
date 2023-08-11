@@ -17,33 +17,21 @@ export async function GET(
   return NextResponse.json(post);
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
-  const post = await prisma.post.update({
-    where: {
-      title: id,
-    },
-    data: {
-      views: { increment: 1 },
-    },
-  });
-  if (!post) {
-    return NextResponse.json("Post not found");
-  }
-  return NextResponse.json(post);
-}
-
 export async function POST(
   request: Request,
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
-  const post = await prisma.post.create({
-    data: {
+  const post = await prisma.post.upsert({
+    where: {
       title: id,
+    },
+    update: {
+      views: { increment: 1 },
+    },
+    create: {
+      title: id,
+      views: 1,
     },
   });
   return NextResponse.json(post);
