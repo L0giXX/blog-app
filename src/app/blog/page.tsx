@@ -2,13 +2,27 @@ import React from "react";
 import Link from "next/link";
 import { getAllPostsMeta } from "@lib/mdx";
 import { formatDate } from "@lib/formatDate";
-import { getViews } from "@lib/views";
+
+const server = process.env.SERVER_URL;
 
 interface PostViews {
   id: string;
   title: string;
   createdAt: string;
   views: number;
+}
+
+async function getViews() {
+  const res = await fetch(`${server}/api/views`, {
+    method: "GET",
+    cache: "no-cache",
+  });
+  if (!res.ok) {
+    throw new Error("Error fetching views");
+  }
+  const data = await res.json();
+  console.log(data);
+  return data;
 }
 
 export default async function Page() {
