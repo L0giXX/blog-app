@@ -3,8 +3,6 @@ import Link from "next/link";
 import { getAllPostsMeta } from "@lib/mdx";
 import { formatDate } from "@lib/formatDate";
 
-const server = process.env.SERVER_URL;
-
 interface PostViews {
   id: string;
   title: string;
@@ -13,6 +11,7 @@ interface PostViews {
 }
 
 async function getViews() {
+  const server = process.env.SERVER_URL;
   const res = await fetch(`${server}/api/views`, {
     method: "GET",
     cache: "no-cache",
