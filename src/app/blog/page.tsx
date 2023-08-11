@@ -14,12 +14,13 @@ async function getViews() {
   const server = process.env.SERVER_URL;
   const res = await fetch(`${server}/api/views`, {
     method: "GET",
+    headers: { "Content-Type": "application/json" },
     cache: "no-cache",
   });
-  const data = await res.json();
   if (!res.ok) {
-    console.log(data.error);
+    throw new Error("Error fetching views");
   }
+  const data = await res.json();
   return data;
 }
 
