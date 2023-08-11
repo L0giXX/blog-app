@@ -17,17 +17,16 @@ async function getViews() {
     headers: { "Content-Type": "application/json" },
     cache: "no-cache",
   });
-  if (!res.ok) {
-    throw new Error("Error fetching views");
-  }
   const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
   return data.posts;
 }
 
 export default async function Page() {
   let posts = await getAllPostsMeta();
   const postViews = (await getViews()) as PostViews[];
-  console.log(postViews);
   if (!posts) return null;
   if (!postViews) return null;
   posts = formatDate(posts);
