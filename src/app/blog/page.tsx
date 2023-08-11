@@ -16,11 +16,10 @@ async function getViews() {
     method: "GET",
     cache: "no-cache",
   });
-  if (!res.ok) {
-    throw new Error("Error fetching views");
-  }
   const data = await res.json();
-  console.log(data);
+  if (!res.ok) {
+    throw new Error(data.error);
+  }
   return data;
 }
 
