@@ -54,11 +54,9 @@ export default async function Page() {
                   {post.title}
                 </h1>
                 <h2 className="text-sm text-gray-600">{post.date}</h2>
-                {/* {post.views > 0 && ( */}
                 <h2 className="mb-2 text-sm text-gray-600">
                   {post.views} views
                 </h2>
-                {/* )} */}
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>

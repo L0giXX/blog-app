@@ -17,6 +17,7 @@ export async function GET(
   return NextResponse.json(post);
 }
 
+// Upsert is a combination of update and create. If the record exists, it will be updated. If it doesn't exist, it will be created.
 export async function POST(
   request: Request,
   { params }: { params: { id: string } }

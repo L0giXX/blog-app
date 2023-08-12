@@ -4,7 +4,7 @@ import { TailSpin } from "react-loader-spinner";
 
 export default function Loading() {
   return (
-    <div className="mx-auto max-w-[640px]">
+    <div className="mx-auto max-w-[640px] px-4">
       <TailSpin
         height="40"
         width="40"
