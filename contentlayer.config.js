@@ -50,7 +50,7 @@ export default makeSource({
       [
         rehypePrettyCode,
         {
-          theme: "github-dark",
+          theme: "light-plus",
         },
       ],
       [rehypeAutolinkHeadings, { behavior: "wrap" }],
