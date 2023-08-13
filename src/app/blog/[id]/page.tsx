@@ -40,6 +40,13 @@ async function upsertViews(id: string) {
   }
 }
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const post = await getPost(params.id);
+  return {
+    title: post?.meta.title,
+  };
+}
+
 export default async function Page({ params }: { params: { id: string } }) {
   const post = await getPost(params.id);
   await upsertViews(params.id);
