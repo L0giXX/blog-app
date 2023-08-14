@@ -1,5 +1,3 @@
-import React from "react";
-
 type Repo = {
   id: string;
   name: string;

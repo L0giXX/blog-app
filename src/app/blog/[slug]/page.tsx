@@ -1,4 +1,3 @@
-import React from "react";
 import { allPosts } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
@@ -13,8 +12,8 @@ interface viewsPerPost {
   createdAt: Date;
 }
 
-async function getViewsById(id: string) {
-  const res = await fetch(`${server}/api/views/${id}`, {
+async function getViewsById(slug: string) {
+  const res = await fetch(`${server}/api/views/${slug}`, {
     method: "GET",
     cache: "no-cache",
   });
@@ -25,8 +24,8 @@ async function getViewsById(id: string) {
   return data;
 }
 
-async function upsertViews(id: string) {
-  const res = await fetch(`${server}/api/views/${id}`, {
+async function upsertViews(slug: string) {
+  const res = await fetch(`${server}/api/views/${slug}`, {
     method: "POST",
     cache: "no-cache",
   });

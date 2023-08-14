@@ -3,12 +3,12 @@ import { prisma } from "@lib/prisma";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
-  const { id } = params;
+  const { slug } = params;
   const post = await prisma.post.findUnique({
     where: {
-      title: id,
+      title: slug,
     },
   });
   if (!post) {
@@ -20,18 +20,18 @@ export async function GET(
 // Upsert is a combination of update and create. If the record exists, it will be updated. If it doesn't exist, it will be created.
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
-  const { id } = params;
+  const { slug } = params;
   const post = await prisma.post.upsert({
     where: {
-      title: id,
+      title: slug,
     },
     update: {
       views: { increment: 1 },
     },
     create: {
-      title: id,
+      title: slug,
       views: 1,
     },
   });

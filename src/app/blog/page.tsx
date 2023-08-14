@@ -1,4 +1,3 @@
-import React from "react";
 import { allPosts } from "contentlayer/generated";
 import { formatDateofPosts } from "@/lib/formatDate";
 import { notFound } from "next/navigation";

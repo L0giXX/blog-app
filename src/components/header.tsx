@@ -1,9 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ProfileImage from "./profileImage";
 import Svg from "./svg";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
