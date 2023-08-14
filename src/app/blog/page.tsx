@@ -14,7 +14,7 @@ interface PostView {
 async function getViews() {
   const res = await fetch(`${server}/api/views`, {
     method: "GET",
-    cache: "no-store",
+    cache: "no-cache",
   });
   if (!res.ok) {
     notFound();
