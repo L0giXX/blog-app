@@ -15,13 +15,12 @@ interface PostViews {
 async function getViews() {
   const res = await fetch(`${server}/api/views`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
     cache: "no-cache",
   });
-  const data = await res.json();
   if (!res.ok) {
-    throw new Error(data.error);
+    notFound();
   }
+  const data = await res.json();
   return data.posts;
 }
 
@@ -51,7 +50,7 @@ export default async function Page() {
                   {post.title}
                 </h1>
                 <h2 className="text-sm text-gray-600">{post.date}</h2>
-                {postViews.map((postV) => (
+                {/* {postViews.map((postV) => (
                   <div key={postV.id}>
                     {postV.title === post.slugAsParams && (
                       <h2 className="mb-2 text-sm text-gray-600">
@@ -59,7 +58,7 @@ export default async function Page() {
                       </h2>
                     )}
                   </div>
-                ))}
+                ))} */}
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>

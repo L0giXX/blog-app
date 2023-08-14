@@ -18,7 +18,7 @@ async function getViewsById(slug: string) {
     cache: "no-cache",
   });
   if (!res.ok) {
-    throw new Error("Error fetching views");
+    notFound();
   }
   const data = await res.json();
   return data;
