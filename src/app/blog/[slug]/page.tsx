@@ -2,7 +2,7 @@ import React from "react";
 import { allPosts } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
-import { formatDate3 } from "@lib/formatDate";
+import { formatDateofPost } from "@lib/formatDate";
 
 const server = process.env.SERVER_URL;
 
@@ -39,7 +39,7 @@ async function upsertViews(id: string) {
 async function getPostFromParams(slug: string) {
   let post = allPosts.find((post) => post.slugAsParams === slug);
   if (!post) notFound();
-  post = formatDate3(post);
+  post = formatDateofPost(post);
   return post;
 }
 
@@ -60,7 +60,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { views } = postViews;
   let post = await getPostFromParams(params.slug);
   const MDXComponent = getMDXComponent(post.body.code);
-  console.log(post);
   return (
     <div>
       <div className="mx-auto max-w-[640px] rounded-lg bg-white/50 p-4">
