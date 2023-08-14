@@ -2,27 +2,7 @@ import { allPosts } from "contentlayer/generated";
 import { formatDateofPosts } from "@/lib/formatDate";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-
-const server = process.env.SERVER_URL;
-
-interface PostView {
-  id: string;
-  title: string;
-  views: number;
-}
-
-async function getViews() {
-  const res = await fetch(`${server}/api/views`, {
-    method: "GET",
-    cache: "no-cache",
-    next: { revalidate: 0 },
-  });
-  if (!res.ok) {
-    notFound();
-  }
-  const data = await res.json();
-  return data.posts;
-}
+import Views from "./views-component";
 
 async function getAllPosts() {
   let posts = allPosts;
@@ -34,7 +14,6 @@ async function getAllPosts() {
 
 export default async function Page() {
   const posts = await getAllPosts();
-  const postViews = (await getViews()) as PostView[];
 
   return (
     <div>
@@ -50,15 +29,7 @@ export default async function Page() {
                   {post.title}
                 </h1>
                 <h2 className="text-sm text-gray-600">{post.date}</h2>
-                {postViews?.map((postV) => (
-                  <div key={postV.id}>
-                    {postV.title === post.slugAsParams && (
-                      <h2 className="mb-2 text-sm text-gray-600">
-                        {postV.views} views
-                      </h2>
-                    )}
-                  </div>
-                ))}
+                <Views post={post} />
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>

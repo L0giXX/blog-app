@@ -1,15 +1,20 @@
 "use client";
 import { TailSpin } from "react-loader-spinner";
 
-export default function Loading() {
+interface LoadingProps {
+  height?: string;
+  width?: string;
+}
+
+export default function Loading({ height = "50", width = "50" }: LoadingProps) {
   return (
-    <div className="mx-auto max-w-[640px] px-4">
+    <div className="mx-auto max-w-[640px]">
       <TailSpin
-        height="40"
-        width="40"
+        height={height}
+        width={width}
         color="#FFFFFF"
         ariaLabel="tail-spin-loading"
-        radius="1"
+        radius={1}
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
