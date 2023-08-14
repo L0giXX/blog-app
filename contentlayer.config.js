@@ -51,6 +51,7 @@ export default makeSource({
         rehypePrettyCode,
         {
           theme: "light-plus",
+          keepBackground: false,
         },
       ],
       [rehypeAutolinkHeadings, { behavior: "wrap" }],
