@@ -5,11 +5,10 @@ import Link from "next/link";
 
 const server = process.env.SERVER_URL;
 
-interface PostViews {
+interface PostView {
   id: string;
   title: string;
   views: number;
-  createdAt: Date;
 }
 
 async function getViews() {
@@ -33,8 +32,8 @@ async function getAllPosts() {
 }
 
 export default async function Page() {
-  let posts = await getAllPosts();
-  const postViews = (await getViews()) as PostViews[];
+  const posts = await getAllPosts();
+  const postViews = (await getViews()) as PostView[];
 
   return (
     <div>
@@ -50,16 +49,15 @@ export default async function Page() {
                   {post.title}
                 </h1>
                 <h2 className="text-sm text-gray-600">{post.date}</h2>
-                {postViews?.length > 0 &&
-                  postViews.map((postV) => (
-                    <div key={postV.id}>
-                      {postV.title === post.slugAsParams && (
-                        <h2 className="mb-2 text-sm text-gray-600">
-                          {postV.views} views
-                        </h2>
-                      )}
-                    </div>
-                  ))}
+                {postViews?.map((postV) => (
+                  <div key={postV.id}>
+                    {postV.title === post.slugAsParams && (
+                      <h2 className="mb-2 text-sm text-gray-600">
+                        {postV.views} views
+                      </h2>
+                    )}
+                  </div>
+                ))}
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>
