@@ -15,6 +15,7 @@ async function getViews() {
   const res = await fetch(`${server}/api/views`, {
     method: "GET",
     cache: "no-cache",
+    next: { revalidate: 0 },
   });
   if (!res.ok) {
     notFound();
