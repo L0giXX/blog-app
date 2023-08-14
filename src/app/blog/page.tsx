@@ -50,15 +50,16 @@ export default async function Page() {
                   {post.title}
                 </h1>
                 <h2 className="text-sm text-gray-600">{post.date}</h2>
-                {/* {postViews.map((postV) => (
-                  <div key={postV.id}>
-                    {postV.title === post.slugAsParams && (
-                      <h2 className="mb-2 text-sm text-gray-600">
-                        {postV.views} views
-                      </h2>
-                    )}
-                  </div>
-                ))} */}
+                {postViews?.length > 0 &&
+                  postViews.map((postV) => (
+                    <div key={postV.id}>
+                      {postV.title === post.slugAsParams && (
+                        <h2 className="mb-2 text-sm text-gray-600">
+                          {postV.views} views
+                        </h2>
+                      )}
+                    </div>
+                  ))}
                 <p className=" text-gray-500">{post.description}</p>
               </Link>
             </div>
