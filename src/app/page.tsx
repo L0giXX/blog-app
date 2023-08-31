@@ -41,11 +41,11 @@ async function Home() {
   const colors = await getColors();
   const filteredRepos = repos.filter(
     (repo) =>
-      repo.name === "blog-app" ||
-      repo.name === "GameMain-2022-2023_Mueller" ||
-      repo.name === "MongoDB_API" ||
-      repo.name === "recipe-app" ||
-      repo.name === "weather-app"
+      repo.name !== "L0giXX" &&
+      repo.name !== "SchuleTest" &&
+      repo.name !== "todo-list" &&
+      repo.name !== "svt-analytics" &&
+      repo.name !== "smashpoint-tennis"
   );
   filteredRepos.forEach((repo) => {
     repo.color = colors[repo.language]?.color ?? "gray";
