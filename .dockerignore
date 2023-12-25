@@ -1,0 +1,8 @@
+Dockerfile
+.dockerignore
+node_modules/
+!nodes_modules/.prisma
+README.md
+.eslintrc.json
+prettier.config.js
+.next

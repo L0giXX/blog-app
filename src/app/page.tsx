@@ -39,7 +39,7 @@ async function getColors() {
 async function Home() {
   const repos = await getRepos();
   const colors = await getColors();
-  const filteredRepos = repos.filter(
+  const filteredRepos = repos?.filter(
     (repo) =>
       repo.name !== "L0giXX" &&
       repo.name !== "SchuleTest" &&
